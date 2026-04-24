@@ -16,17 +16,11 @@ pipeline {
 
         stage('Allure Report') {
             steps {
-                allure([
-                    includeProperties: false,
+                step([
+                    $class: 'AllureReportPublisher',
                     results: [[path: 'target/allure-results']]
                 ])
             }
-        }
-    }
-
-    post {
-        always {
-            archiveArtifacts artifacts: 'target/*.jtl', fingerprint: true
         }
     }
 }
