@@ -16,11 +16,7 @@ pipeline {
 
         stage('Allure Report') {
             steps {
-                // step([
-                //     $class: 'AllureReportPublisher',
-                //     results: [[path: 'target/allure-results']]
-                // ])
-                ...
+                allure results: [[path: 'target/allure-results']]
             }
         }
     }
