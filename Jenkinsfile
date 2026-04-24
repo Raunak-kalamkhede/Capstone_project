@@ -13,11 +13,5 @@ pipeline {
                 bat 'mvn clean test'
             }
         }
-
-        stage('Allure Report') {
-            steps {
-                allure results: [[path: 'target/allure-results']]
-            }
-        }
     }
 }
