@@ -1,0 +1,22 @@
+# Maven
+target/
+
+# Allure
+allure-results/
+allure-report/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# JMeter Results
+*.jtl
+
+# Selenium Server Jar (optional)
+selenium-server-*.jar
