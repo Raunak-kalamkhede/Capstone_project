@@ -6,9 +6,10 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"stepdefinitions", "hooks"},
-        plugin = {"pretty", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"}
+        plugin = {
+                "pretty",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+        }
 )
-public class CapstoneRunnerTest extends AbstractTestNGCucumberTests 
-{
-
+public class CapstoneRunnerTest extends AbstractTestNGCucumberTests {
 }
