@@ -2,12 +2,11 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven3'   // must match Jenkins Global Tool name
-        jdk 'JDK21'      // must match your configured JDK
+        jdk 'JDK21'
+        maven 'Maven3'
     }
 
     environment {
-        ALLURE_RESULTS = 'target/allure-results'
         JMETER_HOME = 'C:\\Users\\RAUNAK\\Downloads\\apache-jmeter-5.6.3'
     }
 
@@ -15,32 +14,33 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/Shra2411/Capstone-Capg.git'
+                git 'https://github.com/Raunak-kalamkhede/Capstone_project.git'
             }
         }
 
         stage('Build & Test') {
             steps {
-                bat 'mvn clean verify'
+                bat 'mvn clean test'
             }
         }
 
-        stage('Archive Results') {
+        stage('Generate Allure Report') {
             steps {
-                archiveArtifacts artifacts: 'target/**/*', fingerprint: true
+                bat 'allure generate target/allure-results -o target/allure-report --clean'
             }
         }
-    }
 
-    post {
-        always {
-            archiveArtifacts artifacts: 'target/**/*.log', allowEmptyArchive: true
-        }
-        success {
-            echo 'BUILD SUCCESS 🎉'
-        }
-        failure {
-            echo 'BUILD FAILED ❌'
+        stage('Publish Report in Jenkins') {
+            steps {
+                publishHTML([
+                    reportDir: 'target/allure-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Allure Report',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: false
+                ])
+            }
         }
     }
 }
