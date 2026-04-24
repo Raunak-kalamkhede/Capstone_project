@@ -1,0 +1,7 @@
+runner\CapstoneRunnerTest.class
+utils\JMeterManager.class
+stepdefinitions\OmniSteps.class
+utils\ApiManager.class
+utils\WebDriverManager.class
+hooks\CapstoneHooks.class
+utils\ExcelManager.class
